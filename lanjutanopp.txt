@@ -1,0 +1,56 @@
+class Produk(
+    val nama: String,
+    var harga: Double,
+    var stok: Int,
+    val kategori: String,
+    val deskripsi: String
+) {
+    // Fungsi untuk menampilkan informasi detail produk
+    fun tampilkanInfo() {
+        println("Nama Produk: $nama")
+        println("Harga: Rp${harga.format()}")
+        println("Stok: $stok")
+        println("Kategori: $kategori")
+        println("Deskripsi: $deskripsi")
+        println("-------------------------")
+    }
+
+    // Fungsi untuk membeli produk
+    fun beliProduk(jumlah: Int) {
+        if (jumlah > stok) {
+            println("Stok tidak cukup untuk melakukan pembelian $jumlah $nama.")
+        } else {
+            stok -= jumlah
+            println("Anda telah membeli $jumlah $nama.")
+            println("Sisa stok: $stok")
+        }
+    }
+
+    // Fungsi untuk format harga menjadi string
+    private fun Double.format(): String {
+        return String.format("%.2f", this)
+    }
+}
+
+fun main() {
+    // Membuat objek dari class Produk
+    val produk1 = Produk(
+        nama = "Kopi Arabika",
+        harga = 75000.0,
+        stok = 20,
+        kategori = "Minuman",
+        deskripsi = "Kopi Arabika dengan rasa yang khas dan aromatik."
+    )
+
+    // Menampilkan informasi produk
+    produk1.tampilkanInfo()
+
+    // Simulasi pembelian produk
+    println("Melakukan pembelian...")
+    produk1.beliProduk(5) // Mengurangi stok sebanyak 5
+    produk1.tampilkanInfo() // Menampilkan informasi produk setelah pembelian
+
+    // Simulasi pembelian produk dengan jumlah yang melebihi stok
+    println("Melakukan pembelian lebih dari stok...")
+    produk1.beliProduk(30) // Mencoba mengurangi stok sebanyak 30
+}
